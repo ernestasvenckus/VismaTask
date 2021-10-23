@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">VismaTask</string>
+    <string name="see_all">See all</string>
+    <string name="storage">Storage</string>
+    <string name="memory">Memory</string>
+    <string name="filesystem">Filesystem</string>
 </resources>

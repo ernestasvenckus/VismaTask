@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/initialFragment">
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.vismatask.ui.fragments.CategoryFragment"
+        android:label="category_fragment"
+        tools:layout="@layout/category_fragment" />
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="com.example.vismatask.ui.fragments.InitialFragment"
+        android:label="initial_fragment"
+        tools:layout="@layout/initial_fragment" >
+        <action
+            android:id="@+id/action_initialFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_initialFragment_to_memoryFragment"
+            app:destination="@id/memoryFragment" />
+        <action
+            android:id="@+id/action_initialFragment_to_filesystemFragment"
+            app:destination="@id/filesystemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoryFragment"
+        android:name="com.example.vismatask.ui.fragments.MemoryFragment"
+        android:label="memory_fragment"
+        tools:layout="@layout/memory_fragment" />
+    <fragment
+        android:id="@+id/filesystemFragment"
+        android:name="com.example.vismatask.ui.fragments.FilesystemFragment"
+        android:label="filesystem_fragment"
+        tools:layout="@layout/filesystem_fragment" />
+</navigation>
