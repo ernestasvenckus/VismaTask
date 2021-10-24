@@ -11,5 +11,6 @@ data class Song(
     val sizeKB: String,
     val imageUrl: String,
     val lengthSeconds: Int = -1,
-    val genre: String?
+    val genre: String,
+    val saved: Boolean
 )

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="@dimen/app_margin"
+android:orientation="vertical"
+tools:context=".ui.fragments.MemoryFragment">
+
+<TextView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.MemoryFragment">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/app_margin"
+    android:text="@string/memory"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/memory_songs_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:listitem="@layout/song_save_simple_item_layout"/>
 
-</FrameLayout>
+</LinearLayout>

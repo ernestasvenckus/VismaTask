@@ -2,6 +2,8 @@ package com.example.vismatask.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.vismatask.data.db.AppDatabase
+import com.example.vismatask.data.repository.AppRepository
 import com.example.vismatask.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

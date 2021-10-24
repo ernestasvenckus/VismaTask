@@ -3,21 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/app_margin"
     tools:context=".ui.fragments.InitialFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Initial" />
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categories_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="2"
-        tools:listitem="@layout/category_item_layout" />
+        tools:listitem="@layout/category_item_layout"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -25,8 +23,10 @@
         android:text="@string/storage"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/storage_types_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="2"
         tools:listitem="@layout/storage_type_item_layout"/>
 

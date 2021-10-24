@@ -6,10 +6,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/song_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Placeholder"/>
     <TextView
+        android:id="@+id/song_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="12m 33s"/>

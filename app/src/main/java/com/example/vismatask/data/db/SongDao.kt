@@ -1,10 +1,7 @@
 package com.example.vismatask.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.vismatask.data.models.Song
 
 @Dao
@@ -16,9 +13,12 @@ interface SongDao {
     @Query("SELECT * FROM Song WHERE genre = :genre")
     fun findByGenre(genre: String): LiveData<List<Song>>
 
-    @Insert
-    fun insertAll(vararg songs: Song)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(song: Song)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(vararg songs: Song)
 
     @Delete
-    fun delete(song: Song)
+    suspend fun delete(song: Song)
 }

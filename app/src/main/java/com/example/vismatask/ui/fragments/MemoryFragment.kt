@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vismatask.viewmodels.MemoryViewModel
 import com.example.vismatask.R
+import com.example.vismatask.databinding.MemoryFragmentBinding
 
 class MemoryFragment : Fragment() {
 
@@ -16,12 +17,14 @@ class MemoryFragment : Fragment() {
     }
 
     private lateinit var viewModel: MemoryViewModel
+    private lateinit var memoryBinding: MemoryFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.memory_fragment, container, false)
+        memoryBinding = MemoryFragmentBinding.inflate(inflater, container, false)
+        return memoryBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

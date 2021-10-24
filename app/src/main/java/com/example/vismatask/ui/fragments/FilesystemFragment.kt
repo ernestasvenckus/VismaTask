@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.vismatask.viewmodels.FilesystemViewModel
 import com.example.vismatask.R
+import com.example.vismatask.databinding.FilesystemFragmentBinding
 
 class FilesystemFragment : Fragment() {
 
@@ -16,12 +17,14 @@ class FilesystemFragment : Fragment() {
     }
 
     private lateinit var viewModel: FilesystemViewModel
+    private lateinit var filesystemBinding: FilesystemFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.filesystem_fragment, container, false)
+        filesystemBinding = FilesystemFragmentBinding.inflate(inflater, container, false)
+        return filesystemBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
