@@ -1,14 +1,17 @@
 package com.example.vismatask.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
+import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.CategoryItemLayoutBinding
 
-class CategoriesRvAdapter : RecyclerView.Adapter<CategoriesViewHolder>() {
+class CategoriesRvAdapter(allSongs: List<Song>) : RecyclerView.Adapter<CategoriesViewHolder>() {
+
+    val allSongs = allSongs
+    val categories = getCategories(allSongs)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
         return CategoriesViewHolder(
@@ -18,15 +21,44 @@ class CategoriesRvAdapter : RecyclerView.Adapter<CategoriesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
-        Log.e("CategoriesRv", position.toString())
-        val categorySongsRvAdapter = CategorySongsRvAdapter()
+        holder.categoryName.text = categories.get(position)
+        val categorySongsRvAdapter = CategorySongsRvAdapter(getSongsByCategory(categories.get(position)))
         holder.categorySongsRecyclerView.adapter = categorySongsRvAdapter
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return categories.size
     }
 
+    private fun getCategories(songs: List<Song>): List<String>
+    {
+        val result: MutableList<String> = ArrayList();
+
+        for (song in songs)
+        {
+            if (!result.contains(song.genre))
+            {
+                result.add(song.genre)
+            }
+        }
+
+        return result
+    }
+
+    private fun getSongsByCategory(category: String): List<Song>
+    {
+        val result: MutableList<Song> = ArrayList()
+
+        for (song in allSongs)
+        {
+            if (song.genre.equals(category))
+            {
+                result.add(song)
+            }
+        }
+
+        return result
+    }
 }
 
 class CategoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -2,6 +2,11 @@ package com.example.vismatask.data.repository
 
 import com.example.vismatask.data.db.AppDatabase
 import com.example.vismatask.data.models.Song
+import com.example.vismatask.data.rest.ServiceBuilder
+import com.example.vismatask.data.rest.SongsService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AppRepository(
     private val persistentDatabase: AppDatabase,
@@ -36,4 +41,11 @@ class AppRepository(
 
     suspend fun deleteInMemorySong(song: Song) =
         inMemoryDatabase.songDao().delete(song)
+
+    fun fetchSongs(callback: Callback<List<Song>>)
+    {
+        val service = ServiceBuilder.buildService(SongsService::class.java)
+        val call = service.getSongs()
+        call.enqueue(callback)
+    }
 }
