@@ -1,7 +1,6 @@
 package com.example.vismatask.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,17 +44,13 @@ class InitialFragment : Fragment() {
         )[InitialViewModel::class.java]
 
         viewModel.fetchSongs()
-        viewModel.fetchSongs()
 
         viewModel.allInMemorySongs.observe(viewLifecycleOwner) { list ->
-            categoriesRvAdapter = CategoriesRvAdapter(list)
+            categoriesRvAdapter = CategoriesRvAdapter(list, context)
             initialBinding.categoriesRecyclerView.adapter = categoriesRvAdapter
         }
 
-//        categoriesRvAdapter = CategoriesRvAdapter()
-//        initialBinding.categoriesRecyclerView.adapter = categoriesRvAdapter
-
-        storageTypesRvAdapter = StorageTypesRvAdapter()
+        storageTypesRvAdapter = StorageTypesRvAdapter(context)
         initialBinding.storageTypesRecyclerView.adapter = storageTypesRvAdapter
     }
 

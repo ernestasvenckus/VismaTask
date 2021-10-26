@@ -1,6 +1,6 @@
 package com.example.vismatask.ui.adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
 import com.example.vismatask.databinding.StorageTypeItemLayoutBinding
 
-class StorageTypesRvAdapter : RecyclerView.Adapter<StorageTypesViewHolder>() {
+class StorageTypesRvAdapter(val context: Context?) : RecyclerView.Adapter<StorageTypesViewHolder>() {
+
+    private val storageTypes = getStorageTypesList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StorageTypesViewHolder {
         return StorageTypesViewHolder(
@@ -18,13 +20,23 @@ class StorageTypesRvAdapter : RecyclerView.Adapter<StorageTypesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StorageTypesViewHolder, position: Int) {
-        Log.e("StorageTypesRv", position.toString())
+        holder.storageTypeName.text = storageTypes[position]
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return storageTypes.size
     }
 
+    private fun getStorageTypesList(): List<String>
+    {
+        val result: MutableList<String> = ArrayList()
+        if (context != null) {
+            result.add(context.getString(R.string.memory))
+            result.add(context.getString(R.string.filesystem))
+        }
+
+        return result
+    }
 }
 
 class StorageTypesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

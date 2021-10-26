@@ -1,19 +1,17 @@
 package com.example.vismatask.ui.adapters
 
-import android.net.Uri
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import com.example.vismatask.R
 import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.SongItemLayoutBinding
 
-class CategorySongsRvAdapter(songs: List<Song>) : RecyclerView.Adapter<CategorySongsViewHolder>() {
-
-    val songs = songs
+class CategorySongsRvAdapter(private val songs: List<Song>, val context: Context?) : RecyclerView.Adapter<CategorySongsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorySongsViewHolder {
         return CategorySongsViewHolder(
@@ -23,14 +21,17 @@ class CategorySongsRvAdapter(songs: List<Song>) : RecyclerView.Adapter<CategoryS
     }
 
     override fun onBindViewHolder(holder: CategorySongsViewHolder, position: Int) {
-        holder.songTitle.text = songs.get(position).title
-        holder.songSize.text = songs.get(position).sizeKB
-        holder.songLength.text = songs.get(position).lengthSeconds.toString()
-        /*Glide.with(holder.itemView)
-            .load(Uri.parse(songs[position].imageUrl))
-            .centerCrop()
-            .into(holder.songImage)*/
-        //holder.songImage.setImageURI(Uri.parse(songs.get(position).imageUrl))
+        holder.songTitle.text = songs[position].title
+        holder.songSize.text = songs[position].sizeKB
+        holder.songLength.text = songs[position].lengthSeconds.toString()
+        context?.let {
+            Glide.with(it)
+                .load(songs[position].imageUrl)
+                .centerCrop()
+                .signature(ObjectKey(songs[position].title + position))
+                .placeholder(R.drawable.ic_baseline_check_24)
+                .into(holder.songImage)
+        }
     }
 
     override fun getItemCount(): Int {

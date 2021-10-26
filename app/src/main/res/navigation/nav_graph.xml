@@ -9,7 +9,20 @@
         android:id="@+id/categoryFragment"
         android:name="com.example.vismatask.ui.fragments.CategoryFragment"
         android:label="category_fragment"
-        tools:layout="@layout/category_fragment" />
+        tools:layout="@layout/category_fragment" >
+        <action
+            android:id="@+id/action_categoryFragment_to_initialFragment"
+            app:destination="@id/initialFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/initialFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/initialFragment"
         android:name="com.example.vismatask.ui.fragments.InitialFragment"
@@ -17,22 +30,54 @@
         tools:layout="@layout/initial_fragment" >
         <action
             android:id="@+id/action_initialFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_initialFragment_to_memoryFragment"
-            app:destination="@id/memoryFragment" />
+            app:destination="@id/memoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_initialFragment_to_filesystemFragment"
-            app:destination="@id/filesystemFragment" />
+            app:destination="@id/filesystemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/memoryFragment"
         android:name="com.example.vismatask.ui.fragments.MemoryFragment"
         android:label="memory_fragment"
-        tools:layout="@layout/memory_fragment" />
+        tools:layout="@layout/memory_fragment" >
+        <action
+            android:id="@+id/action_memoryFragment_to_initialFragment"
+            app:destination="@id/initialFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/initialFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/filesystemFragment"
         android:name="com.example.vismatask.ui.fragments.FilesystemFragment"
         android:label="filesystem_fragment"
-        tools:layout="@layout/filesystem_fragment" />
+        tools:layout="@layout/filesystem_fragment" >
+        <action
+            android:id="@+id/action_filesystemFragment_to_initialFragment"
+            app:destination="@id/initialFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/initialFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

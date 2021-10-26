@@ -2,6 +2,7 @@ package com.example.vismatask.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Song(
@@ -13,4 +14,4 @@ data class Song(
     val lengthSeconds: Int = -1,
     val genre: String,
     val saved: Boolean
-)
+) : Serializable

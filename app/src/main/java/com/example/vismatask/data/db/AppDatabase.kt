@@ -6,12 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.vismatask.data.models.Song
 
-@Database(entities = [Song::class], version = 1)
+@Database(entities = [Song::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun songDao(): SongDao
 
     companion object {
-        private val DATABASE_NAME = "app_database"
+        private const val DATABASE_NAME = "app_database"
         @Volatile
         private var INSTANCE: AppDatabase? = null
         @Volatile

@@ -1,14 +1,15 @@
 package com.example.vismatask.ui.adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
+import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.SongSimpleItemLayoutBinding
 
-class CategorySongsSimpleRvAdapter : RecyclerView.Adapter<CategorySongsSimpleViewHolder>() {
+class CategorySongsSimpleRvAdapter(private val songs: List<Song>, val context: Context?) : RecyclerView.Adapter<CategorySongsSimpleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorySongsSimpleViewHolder {
         return CategorySongsSimpleViewHolder(
@@ -18,11 +19,11 @@ class CategorySongsSimpleRvAdapter : RecyclerView.Adapter<CategorySongsSimpleVie
     }
 
     override fun onBindViewHolder(holder: CategorySongsSimpleViewHolder, position: Int) {
-        Log.e("CategorySongsSimpleRv", position.toString())
+        holder.songTitle.text = songs[position].title
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return songs.size
     }
 
 }

@@ -1,14 +1,13 @@
 package com.example.vismatask.ui.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.vismatask.viewmodels.MemoryViewModel
-import com.example.vismatask.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.vismatask.databinding.MemoryFragmentBinding
+import com.example.vismatask.viewmodels.MemoryViewModel
 
 class MemoryFragment : Fragment() {
 

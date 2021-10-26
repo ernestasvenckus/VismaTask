@@ -1,17 +1,20 @@
 package com.example.vismatask.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
 import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.CategoryItemLayoutBinding
+import com.example.vismatask.ui.fragments.InitialFragmentDirections
 
-class CategoriesRvAdapter(allSongs: List<Song>) : RecyclerView.Adapter<CategoriesViewHolder>() {
+class CategoriesRvAdapter(private val allSongs: List<Song>, val context: Context?) : RecyclerView.Adapter<CategoriesViewHolder>() {
 
-    val allSongs = allSongs
-    val categories = getCategories(allSongs)
+    private val categories = getCategories(allSongs)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
         return CategoriesViewHolder(
@@ -21,8 +24,17 @@ class CategoriesRvAdapter(allSongs: List<Song>) : RecyclerView.Adapter<Categorie
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
-        holder.categoryName.text = categories.get(position)
-        val categorySongsRvAdapter = CategorySongsRvAdapter(getSongsByCategory(categories.get(position)))
+        holder.categoryName.text = categories[position]
+
+        val songs = getSongsByCategory(categories[position])
+
+        val categorySongsRvAdapter = CategorySongsRvAdapter(songs, context)
+
+        holder.buttonSeeAll.setOnClickListener {
+            val action = InitialFragmentDirections.actionInitialFragmentToCategoryFragment(categories[position])
+            Navigation.findNavController(it).navigate(action)
+        }
+
         holder.categorySongsRecyclerView.adapter = categorySongsRvAdapter
     }
 
@@ -51,7 +63,7 @@ class CategoriesRvAdapter(allSongs: List<Song>) : RecyclerView.Adapter<Categorie
 
         for (song in allSongs)
         {
-            if (song.genre.equals(category))
+            if (song.genre == category)
             {
                 result.add(song)
             }
