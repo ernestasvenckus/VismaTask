@@ -16,10 +16,6 @@ import com.example.vismatask.viewmodels.InitialViewModelFactory
 
 class InitialFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = InitialFragment()
-    }
-
     private lateinit var viewModel: InitialViewModel
     private lateinit var categoriesRvAdapter: CategoriesRvAdapter
     private lateinit var storageTypesRvAdapter: StorageTypesRvAdapter
@@ -28,7 +24,7 @@ class InitialFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         initialBinding = InitialFragmentBinding.inflate(inflater, container, false)
         return initialBinding.root
     }
@@ -37,21 +33,35 @@ class InitialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appRepository = AppRepository(AppDatabase.getDatabase(requireContext()), AppDatabase.getInMemoryDatabase(requireContext()))
-        val initialViewModelProviderFactory = InitialViewModelFactory(appRepository)
-        viewModel = ViewModelProvider(
-            this,
-            initialViewModelProviderFactory
-        )[InitialViewModel::class.java]
+        val initialViewModelProviderFactory =
+            activity?.let { InitialViewModelFactory(appRepository, it.application) }
+        if (initialViewModelProviderFactory != null)
+        {
+            viewModel = ViewModelProvider(
+                this,
+                initialViewModelProviderFactory
+            )[InitialViewModel::class.java]
+        }
 
         viewModel.fetchSongs()
 
         viewModel.allInMemorySongs.observe(viewLifecycleOwner) { list ->
             categoriesRvAdapter = CategoriesRvAdapter(list, context)
             initialBinding.categoriesRecyclerView.adapter = categoriesRvAdapter
+
+            storageTypesRvAdapter = StorageTypesRvAdapter(context, viewModel.getStorageTypesList())
+            initialBinding.storageTypesRecyclerView.adapter = storageTypesRvAdapter
         }
 
-        storageTypesRvAdapter = StorageTypesRvAdapter(context)
-        initialBinding.storageTypesRecyclerView.adapter = storageTypesRvAdapter
+        viewModel.allPersistentSongs.observe(viewLifecycleOwner) {
+            storageTypesRvAdapter = StorageTypesRvAdapter(context, viewModel.getStorageTypesList())
+            initialBinding.storageTypesRecyclerView.adapter = storageTypesRvAdapter
+        }
+
+        initialBinding.swipeSongsRefresh.setOnRefreshListener {
+            viewModel.fetchSongs()
+            initialBinding.swipeSongsRefresh.isRefreshing = false
+        }
     }
 
 }

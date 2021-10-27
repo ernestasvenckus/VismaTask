@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
 import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.SongSimpleItemLayoutBinding
+import com.example.vismatask.utils.SongUtils
 
 class CategorySongsSimpleRvAdapter(private val songs: List<Song>, val context: Context?) : RecyclerView.Adapter<CategorySongsSimpleViewHolder>() {
 
@@ -20,12 +21,12 @@ class CategorySongsSimpleRvAdapter(private val songs: List<Song>, val context: C
 
     override fun onBindViewHolder(holder: CategorySongsSimpleViewHolder, position: Int) {
         holder.songTitle.text = songs[position].title
+        holder.songInfo.text = SongUtils.getSongSizeAndLengthString(songs[position])
     }
 
     override fun getItemCount(): Int {
         return songs.size
     }
-
 }
 
 class CategorySongsSimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

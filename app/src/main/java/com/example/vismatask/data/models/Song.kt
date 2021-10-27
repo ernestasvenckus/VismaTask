@@ -9,9 +9,9 @@ data class Song(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     val title: String,
-    val sizeKB: String,
+    val sizeKB: Long = -1,
     val imageUrl: String,
-    val lengthSeconds: Int = -1,
+    val lengthSeconds: Long = -1,
     val genre: String,
-    val saved: Boolean
+    var saved: Boolean
 ) : Serializable

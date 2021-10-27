@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/song_title"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Placeholder"/>
@@ -14,6 +15,7 @@
         android:id="@+id/song_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="italic"
         tools:text="12m 33s"/>
     <View
         android:layout_width="match_parent"

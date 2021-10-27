@@ -10,6 +10,7 @@ import com.bumptech.glide.signature.ObjectKey
 import com.example.vismatask.R
 import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.SongItemLayoutBinding
+import com.example.vismatask.utils.SongUtils
 
 class CategorySongsRvAdapter(private val songs: List<Song>, val context: Context?) : RecyclerView.Adapter<CategorySongsViewHolder>() {
 
@@ -22,14 +23,14 @@ class CategorySongsRvAdapter(private val songs: List<Song>, val context: Context
 
     override fun onBindViewHolder(holder: CategorySongsViewHolder, position: Int) {
         holder.songTitle.text = songs[position].title
-        holder.songSize.text = songs[position].sizeKB
-        holder.songLength.text = songs[position].lengthSeconds.toString()
+        holder.songSize.text = SongUtils.formatSongSizeToMegabytesString(songs[position].sizeKB)
+        holder.songLength.text = SongUtils.formatSongLengthToString(songs[position].lengthSeconds)
         context?.let {
             Glide.with(it)
                 .load(songs[position].imageUrl)
                 .centerCrop()
                 .signature(ObjectKey(songs[position].title + position))
-                .placeholder(R.drawable.ic_baseline_check_24)
+                .placeholder(R.drawable.ic_baseline_image_24)
                 .into(holder.songImage)
         }
     }
@@ -39,7 +40,7 @@ class CategorySongsRvAdapter(private val songs: List<Song>, val context: Context
     }
 
     companion object {
-        const val MAX_NUMBER_OF_SONGS = 5;
+        const val MAX_NUMBER_OF_SONGS = 5
     }
 }
 

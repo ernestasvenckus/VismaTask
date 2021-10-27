@@ -4,9 +4,7 @@ import com.example.vismatask.data.db.AppDatabase
 import com.example.vismatask.data.models.Song
 import com.example.vismatask.data.rest.ServiceBuilder
 import com.example.vismatask.data.rest.SongsService
-import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 
 class AppRepository(
     private val persistentDatabase: AppDatabase,

@@ -1,14 +1,21 @@
 package com.example.vismatask.ui.adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
+import com.example.vismatask.data.models.Song
 import com.example.vismatask.databinding.SongSaveSimpleItemLayoutBinding
+import com.example.vismatask.utils.SongUtils
 
-class SongsRvAdapter : RecyclerView.Adapter<SongsViewHolder>() {
+class SongsRvAdapter(private val songs: List<Song>, val context: Context?, private val delegate: SongsDelegate) : RecyclerView.Adapter<SongsViewHolder>() {
+
+    interface SongsDelegate
+    {
+        fun toggleSongSaveStatus(song: Song)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongsViewHolder {
         return SongsViewHolder(
@@ -18,13 +25,34 @@ class SongsRvAdapter : RecyclerView.Adapter<SongsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SongsViewHolder, position: Int) {
-        Log.e("SongsRv", position.toString())
+        holder.songTitle.text = songs[position].title
+        holder.songInfo.text = SongUtils.getSongSizeAndLengthString(songs[position])
+
+        if (context != null) {
+            if (songs[position].saved) {
+                holder.buttonSaveSong.setImageDrawable(context.getDrawable(R.drawable.ic_baseline_check_24))
+            }
+            else {
+                holder.buttonSaveSong.setImageDrawable(context.getDrawable(R.drawable.ic_baseline_save_24))
+            }
+
+            holder.buttonSaveSong.setOnClickListener {
+                if (songs[position].saved) {
+                    holder.buttonSaveSong.setImageDrawable(context.getDrawable(R.drawable.ic_baseline_save_24))
+                }
+                else {
+                    holder.buttonSaveSong.setImageDrawable(context.getDrawable(R.drawable.ic_baseline_check_24))
+                }
+
+                delegate.toggleSongSaveStatus(songs[position])
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return songs.size
     }
-
 }
 
 class SongsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

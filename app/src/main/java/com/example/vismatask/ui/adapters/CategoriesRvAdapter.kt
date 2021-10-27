@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vismatask.R
 import com.example.vismatask.data.models.Song
@@ -44,7 +43,7 @@ class CategoriesRvAdapter(private val allSongs: List<Song>, val context: Context
 
     private fun getCategories(songs: List<Song>): List<String>
     {
-        val result: MutableList<String> = ArrayList();
+        val result: MutableList<String> = ArrayList()
 
         for (song in songs)
         {

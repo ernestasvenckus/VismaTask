@@ -16,10 +16,6 @@ import com.example.vismatask.viewmodels.CategoryViewModelFactory
 
 class CategoryFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CategoryFragment()
-    }
-
     private lateinit var viewModel: CategoryViewModel
     private lateinit var categoryBinding: CategoryFragmentBinding
     private lateinit var categoryRvAdapter: CategorySongsSimpleRvAdapter
@@ -28,7 +24,7 @@ class CategoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         categoryBinding = CategoryFragmentBinding.inflate(inflater, container, false)
         return categoryBinding.root
     }
@@ -43,7 +39,7 @@ class CategoryFragment : Fragment() {
             categoryViewModelProviderFactory
         )[CategoryViewModel::class.java]
 
-        categoryBinding.categoryName.text = args.category;
+        categoryBinding.categoryName.text = args.category
 
         viewModel.categorySongs.observe(viewLifecycleOwner) { list ->
             categoryRvAdapter = CategorySongsSimpleRvAdapter(list, context)

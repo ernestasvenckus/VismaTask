@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
         android:orientation="vertical">
 
         <ImageView
@@ -22,6 +23,9 @@
             android:id="@+id/song_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minLines="@integer/lines_for_song_name"
+            android:maxLines="@integer/lines_for_song_name"
             tools:text="Placeholder"/>
 
         <LinearLayout

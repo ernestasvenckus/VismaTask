@@ -12,6 +12,7 @@
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/category_header_text_size"
         android:layout_marginBottom="@dimen/app_margin"
         tools:text="Category"/>
 
@@ -19,6 +20,7 @@
         android:id="@+id/category_songs_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/song_simple_item_layout"/>
 
